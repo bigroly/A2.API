@@ -1,0 +1,12 @@
+**/bin/*
+**/obj/*
+**/packages/*
+.vs/
+*.user
+*.suo
+StyleCop.Cache
+.svn
+*.DotSettings
+release/
+debug/
+*.log

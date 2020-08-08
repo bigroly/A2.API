@@ -5,6 +5,7 @@
     <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.3.111.18" />
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.106.34" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.110.58" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.100.1" />
@@ -15,8 +16,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview1.19506.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\Request\" />
   </ItemGroup>
 </Project>

@@ -32,6 +32,7 @@ namespace A2.API
 
       // Add S3 to the ASP.NET Core dependency injection framework.
       services.AddAWSService<Amazon.S3.IAmazonS3>();
+      services.AddAWSService<Amazon.CognitoIdentityProvider.IAmazonCognitoIdentityProvider>();
 
       services.AddSingleton<IUtilityService, UtilityService>();
       services.AddSingleton<IUserService, UserService>();

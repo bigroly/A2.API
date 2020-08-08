@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using A2.API.Contracts.Response;
 using A2.API.Models;
+using A2.API.Models.Users;
 using A2.API.Services;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.AspNetCore.Http;
@@ -16,8 +16,7 @@ namespace A2.API.Controllers
   [ApiController]
   public class UsersController : ControllerBase
   {
-    private IUserService _userService;
-    
+    private IUserService _userService;    
 
     public UsersController(IUserService userService)
     {
@@ -45,7 +44,7 @@ namespace A2.API.Controllers
       }
     }
 
-    [HttpPost("")]
+    [HttpPost()]
     public async Task<CreateUserResponse> CreateUser(User user)
     {
       try
@@ -58,6 +57,26 @@ namespace A2.API.Controllers
       catch(Exception e)
       {
         return new CreateUserResponse()
+        {
+          Success = false,
+          ErrorMessage = e.Message
+        };
+      }
+    }
+
+    [HttpPut]
+    public async Task<UpdateUserResponse> UpdateUser(User user)
+    {
+      try
+      {
+        return new UpdateUserResponse()
+        {
+          Success = await _userService.UpdateUser(user)
+        };
+      }
+      catch(Exception e)
+      {
+        return new UpdateUserResponse()
         {
           Success = false,
           ErrorMessage = e.Message

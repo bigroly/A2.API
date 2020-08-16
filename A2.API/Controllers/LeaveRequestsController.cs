@@ -11,5 +11,6 @@ namespace A2.API.Controllers
   [ApiController]
   public class LeaveRequestsController : ControllerBase
   {
+    
   }
 }

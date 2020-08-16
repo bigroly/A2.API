@@ -29,10 +29,12 @@ namespace A2.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers();
+      services.AddHttpClient();
 
       // Add S3 to the ASP.NET Core dependency injection framework.
       services.AddAWSService<Amazon.S3.IAmazonS3>();
       services.AddAWSService<Amazon.CognitoIdentityProvider.IAmazonCognitoIdentityProvider>();
+      services.AddAWSService<Amazon.DynamoDBv2.IAmazonDynamoDB>();
 
       services.AddSingleton<IUtilityService, UtilityService>();
       services.AddSingleton<IUserService, UserService>();

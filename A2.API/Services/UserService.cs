@@ -61,7 +61,7 @@ namespace A2.API.Services
       AdminCreateUserRequest cognitoCreateUserRequest = new AdminCreateUserRequest()
       {
         UserPoolId = _config.GetValue<string>("Cognito:PoolId"),
-        Username = user.Email,
+        Username = user.EmailAddress,
         DesiredDeliveryMediums = new List<string> { "EMAIL" }
       };
 

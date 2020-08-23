@@ -17,6 +17,7 @@ namespace A2.API
   public class Startup
   {
     public const string AppS3BucketKey = "AppS3Bucket";
+    public const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
     public Startup(IConfiguration configuration)
     {
@@ -30,6 +31,12 @@ namespace A2.API
     {
       services.AddControllers();
       services.AddHttpClient();
+
+      services.AddCors(options =>
+      {
+        options.AddPolicy(MyAllowSpecificOrigins,
+              builder => builder.WithOrigins("*"));
+      });
 
       // Add S3 to the ASP.NET Core dependency injection framework.
       services.AddAWSService<Amazon.S3.IAmazonS3>();
@@ -52,6 +59,12 @@ namespace A2.API
       }
 
       app.UseHttpsRedirection();
+      app.UseCors(MyAllowSpecificOrigins);
+      app.Use((context, next) =>
+      {
+        context.Response.Headers["Access-Control-Allow-Origin"] = "*";
+        return next.Invoke();
+      });
 
       app.UseRouting();
 
@@ -61,6 +74,7 @@ namespace A2.API
       {
         endpoints.MapControllers();
       });
+      //app.UseMvc();
     }
   }
 }

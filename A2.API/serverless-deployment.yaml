@@ -26,7 +26,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: 'A2.API::A2.API.LambdaEntryPoint::FunctionHandlerAsync'
-      Runtime: dotnetcore2.1
+      Runtime: dotnetcore3.1
       CodeUri: ''
       MemorySize: 1024
       Timeout: 30

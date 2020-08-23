@@ -13,6 +13,7 @@ namespace A2.API.Models.Requests
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string LeaveType { get; set; }
+    public string Note { get; set; }
     public string DocLink { get; set; }
   }
 }

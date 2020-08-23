@@ -23,7 +23,7 @@ namespace A2.API.Controllers
       _userService = userService;
     }
 
-    [HttpGet("")]
+    [HttpGet("list")]
     public async Task<GetAllUsersResponse> GetAllUsers()
     {
       try
@@ -37,6 +37,27 @@ namespace A2.API.Controllers
       catch(Exception e)
       {
         return new GetAllUsersResponse()
+        {
+          Success = false,
+          ErrorMessage = e.Message
+        };
+      }
+    }
+
+    [HttpGet()]
+    public async Task<GetUserResponse> GetUser(string userEmail)
+    {
+      try
+      {
+        return new GetUserResponse()
+        {
+          Success = true,
+          User = await _userService.GetUser(userEmail)
+        };
+      }
+      catch (Exception e)
+      {
+        return new GetUserResponse()
         {
           Success = false,
           ErrorMessage = e.Message

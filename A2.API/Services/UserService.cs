@@ -15,6 +15,7 @@ namespace A2.API.Services
   public interface IUserService
   {
     Task<List<User>> GetAllUsers();
+    Task<User> GetUser(string userEmail);
     Task<bool> CreateUser(User user);
     Task<bool> UpdateUser(User user);
   }
@@ -54,6 +55,36 @@ namespace A2.API.Services
       }
 
       return allUsers;
+    }
+
+    public async Task<User> GetUser(string userEmail)
+    {      
+
+      QueryRequest query = new QueryRequest()
+      {
+        TableName = _config.GetValue<string>("DynamoDbTables:UserTableName"),
+        ReturnConsumedCapacity = "TOTAL",
+        KeyConditionExpression = "EmailAddress = :v_EmailAddress",
+        ExpressionAttributeValues = new Dictionary<string, AttributeValue>()
+        {
+            {
+                ":v_EmailAddress",
+                new AttributeValue
+                {
+                    S = userEmail
+                }
+            }
+        }
+      };
+
+      var queryResults = await _dynamoDb.QueryAsync(query);
+
+      if (!queryResults.Items.Any())
+      {
+        return null;
+      }
+
+      return _utils.ToObjectFromDynamoResult<User>(queryResults.Items.First());      
     }
 
     public async Task<bool> CreateUser(User user)

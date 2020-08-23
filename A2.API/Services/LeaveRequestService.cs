@@ -63,7 +63,7 @@ namespace A2.API.Services
     {
       PutItemRequest putRequest = new PutItemRequest()
       {
-        TableName = _config.GetValue<string>("DynamoDbTables:UserTableName"),
+        TableName = _config.GetValue<string>("DynamoDbTables:LeaveRequestsTableName"),
         Item = _utils.ToDynamoAttributeValueDictionary<LeaveRequest>(request)
       };
 

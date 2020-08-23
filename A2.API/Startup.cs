@@ -40,6 +40,7 @@ namespace A2.API
       services.AddSingleton<IUserService, UserService>();
       services.AddSingleton<ILeaveRequestService, LeaveRequestService>();
       services.AddSingleton<IFileService, FileService > ();
+      services.AddSingleton<IApprovalsService, ApprovalsService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
